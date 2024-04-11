@@ -1,40 +1,68 @@
 import type { Config } from 'tailwindcss';
-import defaultTheme from 'tailwindcss/defaultTheme';
 
-const config: Config = {
+const config = {
+  darkMode: ['class'],
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
+  prefix: '',
   theme: {
-    extend: {
+    container: {
+      center: true,
+      padding: '2rem',
       screens: {
-        sm: '500px',
-        md: '800px',
-        lg: '1200px',
-        xl: '1536px',
+        '2xl': '1400px',
       },
+    },
+    extend: {
       colors: {
-        brand: {
-          accent: '#5AD769',
-          main: '#324BC3',
+        dark: {
+          1: '#1C1F2E',
+          2: '#161925',
+          3: '#252A41',
+          4: '#1E2757',
         },
-        text: {
-          primary: '#FFFFFF',
-          secondary: '#0C0F19',
+        blue: {
+          1: '#0E78F9',
         },
-        background: {
-          primary: '#0C0F19',
+        sky: {
+          1: '#C9DDFF',
+          2: '#ECF0FF',
+          3: '#F5FCFF',
+        },
+        orange: {
+          1: '#FF742E',
+        },
+        purple: {
+          1: '#830EF9',
+        },
+        yellow: {
+          1: '#F9A90E',
         },
       },
-      fontFamily: {
-        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-        mono: [...defaultTheme.fontFamily.mono],
-        poppins: ['var(--font-poppins)'],
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      backgroundImage: {
+        hero: "url('/images/hero-background.png')",
       },
     },
   },
-  plugins: [],
-};
+  plugins: [require('tailwindcss-animate')],
+} satisfies Config;
+
 export default config;
