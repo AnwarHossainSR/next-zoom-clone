@@ -1,33 +1,48 @@
-import '@/styles/globals.css';
+import { ReactNode } from "react";
+import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Inter } from "next/font/google";
 
-import { Inter } from 'next/font/google';
+import "@stream-io/video-react-sdk/dist/css/styles.css";
+import "react-datepicker/dist/react-datepicker.css";
+import "@/styles/globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
-import MainFooter from '@/components/Footer';
-import type { ChildrenProps } from '@/types';
+const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  description:
-    'A highly opinionated and complete starter for Next.js projects ready to production. Includes Typescript, Styled Components, Prettier, ESLint, Husky, SEO, and more.',
-  keywords:
-    'next, starter, typescript, tailwind css, prettier, eslint, husky, seo',
-  title: 'Next Starter',
+export const metadata: Metadata = {
+  title: "YOOM",
+  description: "Video calling App",
+  icons: {
+    icon: "/icons/logo.svg",
+  },
 };
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  adjustFontFallback: false,
-});
-
-export default async function RootLayout({ children }: ChildrenProps) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} h-full flex flex-col justify-between`}
+      <ClerkProvider
+        appearance={{
+          layout: {
+            socialButtonsVariant: "iconButton",
+            logoImageUrl: "/icons/yoom-logo.svg",
+          },
+          variables: {
+            colorText: "#fff",
+            colorPrimary: "#0E78F9",
+            colorBackground: "#1C1F2E",
+            colorInputBackground: "#252A41",
+            colorInputText: "#fff",
+          },
+        }}
       >
-        <section className="flex-1">{children}</section>
-        <MainFooter />
-      </body>
+        <body className={`${inter.className} bg-dark-2`}>
+          <Toaster />
+          {children}
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
