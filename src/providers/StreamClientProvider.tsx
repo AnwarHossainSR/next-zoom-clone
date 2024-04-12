@@ -2,7 +2,8 @@
 
 import { useUser } from '@clerk/nextjs';
 import { StreamVideo, StreamVideoClient } from '@stream-io/video-react-sdk';
-import { ReactNode, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 
 import { tokenProvider } from '@/actions/stream.actions';
 import Loader from '@/components/Loader';
