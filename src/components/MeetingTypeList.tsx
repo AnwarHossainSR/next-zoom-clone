@@ -1,12 +1,14 @@
 /* eslint-disable camelcase */
+
 'use client';
 
+import { useUser } from '@clerk/nextjs';
+import type { Call } from '@stream-io/video-react-sdk';
+import { useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
-import { useUser } from '@clerk/nextjs';
-import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import ReactDatePicker from 'react-datepicker';
+
 import HomeCard from './HomeCard';
 import Loader from './Loader';
 import MeetingModal from './MeetingModal';
@@ -60,6 +62,7 @@ const MeetingTypeList = () => {
         title: 'Meeting Created',
       });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
       toast({ title: 'Failed to create Meeting' });
     }
@@ -112,7 +115,7 @@ const MeetingTypeList = () => {
             </label>
             <Textarea
               className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-              onChange={(e) =>
+              onChange={e =>
                 setValues({ ...values, description: e.target.value })
               }
             />
@@ -123,7 +126,7 @@ const MeetingTypeList = () => {
             </label>
             <ReactDatePicker
               selected={values.dateTime}
-              onChange={(date) => setValues({ ...values, dateTime: date! })}
+              onChange={date => setValues({ ...values, dateTime: date! })}
               showTimeSelect
               timeFormat="HH:mm"
               timeIntervals={15}
@@ -142,7 +145,7 @@ const MeetingTypeList = () => {
             navigator.clipboard.writeText(meetingLink);
             toast({ title: 'Link Copied' });
           }}
-          image={'/icons/checked.svg'}
+          image="/icons/checked.svg"
           buttonIcon="/icons/copy.svg"
           className="text-center"
           buttonText="Copy Meeting Link"
@@ -159,7 +162,7 @@ const MeetingTypeList = () => {
       >
         <Input
           placeholder="Meeting link"
-          onChange={(e) => setValues({ ...values, link: e.target.value })}
+          onChange={e => setValues({ ...values, link: e.target.value })}
           className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
         />
       </MeetingModal>
