@@ -1,7 +1,4 @@
 'use client';
-
-import type { IconType } from 'react-icons';
-
 interface ButtonProps {
   label: string;
   // eslint-disable-next-line no-unused-vars
@@ -9,7 +6,7 @@ interface ButtonProps {
   disabled?: boolean;
   outline?: boolean;
   small?: boolean;
-  icon?: IconType;
+  icon?: any;
   isLoading?: boolean;
 }
 
